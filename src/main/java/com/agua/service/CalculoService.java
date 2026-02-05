@@ -38,8 +38,9 @@ public class CalculoService {
         
         // Calcular valor progressivo
         BigDecimal consumo = request.getConsumo();
+        Integer consumoTotalInt = consumo.intValue();
         BigDecimal valorTotal = BigDecimal.ZERO;
-        List<DetalheFaixaDTO> detalhesFaixas = new ArrayList<>();
+        List<DetalheFaixaDTO> detalhamento = new ArrayList<>();
         
         List<FaixaConsumo> faixas = categoria.getFaixas();
         for (int i = 0; i < faixas.size(); i++) {
@@ -56,23 +57,29 @@ public class CalculoService {
                 
                 valorTotal = valorTotal.add(subtotal);
                 
-                // Adicionar detalhe
+                // Adicionar detalhe conforme especificação da documentação
                 DetalheFaixaDTO detalhe = new DetalheFaixaDTO();
-                detalhe.setInicio(faixa.getInicio());
-                detalhe.setFim(faixa.getFim());
-                detalhe.setConsumoNaFaixa(consumoNaFaixa.setScale(2, RoundingMode.HALF_UP));
+                
+                // Criar objeto faixa aninhado
+                DetalheFaixaDTO.FaixaDTO faixaDTO = new DetalheFaixaDTO.FaixaDTO();
+                faixaDTO.setInicio(faixa.getInicio());
+                faixaDTO.setFim(faixa.getFim());
+                detalhe.setFaixa(faixaDTO);
+                
+                // m3Cobrados deve ser Integer (quantidade de m³ cobrados)
+                detalhe.setM3Cobrados(consumoNaFaixa.intValue());
                 detalhe.setValorUnitario(faixa.getValorUnitario());
                 detalhe.setSubtotal(subtotal);
-                detalhesFaixas.add(detalhe);
+                detalhamento.add(detalhe);
             }
         }
         
-        // Montar resposta
+        // Montar resposta conforme especificação da documentação
         CalculoResponseDTO response = new CalculoResponseDTO();
         response.setCategoria(request.getCategoria());
-        response.setConsumoTotal(consumo.setScale(2, RoundingMode.HALF_UP));
+        response.setConsumoTotal(consumoTotalInt);
         response.setValorTotal(valorTotal.setScale(2, RoundingMode.HALF_UP));
-        response.setDetalhesFaixas(detalhesFaixas);
+        response.setDetalhamento(detalhamento);
         
         return response;
     }

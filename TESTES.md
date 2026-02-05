@@ -89,20 +89,24 @@ curl -X POST http://localhost:8080/api/calculos \
 ```json
 {
   "categoria": "PARTICULAR",
-  "consumoTotal": 18.00,
+  "consumoTotal": 18,
   "valorTotal": 22.00,
-  "detalhesFaixas": [
+  "detalhamento": [
     {
-      "inicio": 0,
-      "fim": 10,
-      "consumoNaFaixa": 10.00,
+      "faixa": {
+        "inicio": 0,
+        "fim": 10
+      },
+      "m3Cobrados": 10,
       "valorUnitario": 1.00,
       "subtotal": 10.00
     },
     {
-      "inicio": 10,
-      "fim": 20,
-      "consumoNaFaixa": 8.00,
+      "faixa": {
+        "inicio": 10,
+        "fim": 20
+      },
+      "m3Cobrados": 8,
       "valorUnitario": 1.50,
       "subtotal": 12.00
     }
@@ -133,20 +137,24 @@ curl -X POST http://localhost:8080/api/calculos \
 ```json
 {
   "categoria": "INDUSTRIAL",
-  "consumoTotal": 25.00,
+  "consumoTotal": 25,
   "valorTotal": 57.50,
-  "detalhesFaixas": [
+  "detalhamento": [
     {
-      "inicio": 0,
-      "fim": 15,
-      "consumoNaFaixa": 15.00,
+      "faixa": {
+        "inicio": 0,
+        "fim": 15
+      },
+      "m3Cobrados": 15,
       "valorUnitario": 2.00,
       "subtotal": 30.00
     },
     {
-      "inicio": 15,
-      "fim": 30,
-      "consumoNaFaixa": 10.00,
+      "faixa": {
+        "inicio": 15,
+        "fim": 30
+      },
+      "m3Cobrados": 10,
       "valorUnitario": 2.75,
       "subtotal": 27.50
     }

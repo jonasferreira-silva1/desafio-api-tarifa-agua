@@ -42,5 +42,17 @@ public class TabelaTarifariaController {
         tabelaTarifariaService.excluirTabelaTarifaria(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @PatchMapping("/{id}/ativar")
+    public ResponseEntity<TabelaTarifariaResponseDTO> ativarTabela(@PathVariable Long id) {
+        TabelaTarifariaResponseDTO response = tabelaTarifariaService.ativarTabela(id);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PatchMapping("/{id}/desativar")
+    public ResponseEntity<TabelaTarifariaResponseDTO> desativarTabela(@PathVariable Long id) {
+        TabelaTarifariaResponseDTO response = tabelaTarifariaService.desativarTabela(id);
+        return ResponseEntity.ok(response);
+    }
 }
 

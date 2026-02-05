@@ -10,10 +10,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalheFaixaDTO {
-    private Integer inicio;
-    private Integer fim;
-    private BigDecimal consumoNaFaixa;
+    private FaixaDTO faixa;
+    private Integer m3Cobrados;
     private BigDecimal valorUnitario;
     private BigDecimal subtotal;
+    
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class FaixaDTO {
+        private Integer inicio;
+        private Integer fim;
+    }
 }
 

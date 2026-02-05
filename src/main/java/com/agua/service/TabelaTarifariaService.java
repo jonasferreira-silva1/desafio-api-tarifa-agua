@@ -84,6 +84,39 @@ public class TabelaTarifariaService {
         tabelaTarifariaRepository.delete(tabela);
     }
     
+    @Transactional
+    public TabelaTarifariaResponseDTO ativarTabela(Long id) {
+        TabelaTarifaria tabela = tabelaTarifariaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Tabela tarifária não encontrada com id: " + id));
+        
+        // Desativar todas as outras tabelas (garantir que apenas uma esteja ativa)
+        List<TabelaTarifaria> tabelasAtivas = tabelaTarifariaRepository.findAll().stream()
+                .filter(t -> t.getStatus() == StatusTabela.ATIVA)
+                .collect(Collectors.toList());
+        
+        for (TabelaTarifaria t : tabelasAtivas) {
+            t.setStatus(StatusTabela.INATIVA);
+            tabelaTarifariaRepository.save(t);
+        }
+        
+        // Ativar a tabela solicitada
+        tabela.setStatus(StatusTabela.ATIVA);
+        TabelaTarifaria salva = tabelaTarifariaRepository.save(tabela);
+        
+        return converterParaResponseDTO(salva);
+    }
+    
+    @Transactional
+    public TabelaTarifariaResponseDTO desativarTabela(Long id) {
+        TabelaTarifaria tabela = tabelaTarifariaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Tabela tarifária não encontrada com id: " + id));
+        
+        tabela.setStatus(StatusTabela.INATIVA);
+        TabelaTarifaria salva = tabelaTarifariaRepository.save(tabela);
+        
+        return converterParaResponseDTO(salva);
+    }
+    
     private TabelaTarifariaResponseDTO converterParaResponseDTO(TabelaTarifaria tabela) {
         TabelaTarifariaResponseDTO dto = new TabelaTarifariaResponseDTO();
         dto.setId(tabela.getId());

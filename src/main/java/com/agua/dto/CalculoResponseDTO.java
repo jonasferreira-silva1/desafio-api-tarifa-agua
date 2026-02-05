@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CalculoResponseDTO {
     private CategoriaConsumidor categoria;
-    private BigDecimal consumoTotal;
+    private Integer consumoTotal;
     private BigDecimal valorTotal;
-    private List<DetalheFaixaDTO> detalhesFaixas;
+    private List<DetalheFaixaDTO> detalhamento;
 }
 
