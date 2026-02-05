@@ -9,7 +9,7 @@
 
 ## 📋 Sobre o Projeto
 
-Este projeto foi desenvolvido como solução para o **Desafio Técnico RAS 2026 - API de Tabela Tarifária de Água**. A aplicação é uma API REST completa que gerencia tabelas tarifárias de água e realiza cálculos progressivos de consumo baseados em categorias de consumidores e faixas de consumo parametrizáveis.
+Este projeto foi desenvolvido como solução para o **Desafio Técnico 2026 - API de Tabela Tarifária de Água**. A aplicação é uma API REST completa que gerencia tabelas tarifárias de água e realiza cálculos progressivos de consumo baseados em categorias de consumidores e faixas de consumo parametrizáveis.
 
 ### 🎯 Objetivo do Desafio
 
